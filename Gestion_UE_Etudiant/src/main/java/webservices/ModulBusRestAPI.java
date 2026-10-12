@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/bus")
 public class ModulBusRestAPI {
-    private ModuleBusiness helper=new ModuleBusiness();
+    static ModuleBusiness helper=new ModuleBusiness();
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -25,5 +25,11 @@ public class ModulBusRestAPI {
             return Response.status(200).entity("Module added successfully!").build();
         }
         return Response.status(400).entity("Module already exists!").build();
+    }
+    @Path("/list/{matricule}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getModuleByMatricule(@PathParam("matricule") String matricule) {
+        return Response.status(200).entity(helper.getModuleByMatricule(matricule)).build();
     }
 }
