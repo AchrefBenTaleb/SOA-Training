@@ -32,4 +32,13 @@ public class ModulBusRestAPI {
     public Response getModuleByMatricule(@PathParam("matricule") String matricule) {
         return Response.status(200).entity(helper.getModuleByMatricule(matricule)).build();
     }
+    @Path("/{mat}")
+    @DELETE
+    public Response deleteModule(@PathParam("mat") String mat) {
+        if(helper.deleteModule(mat)){
+            return Response.status(200).entity("deleted").build();
+        }
+        else
+            return Response.status(400).entity("not found").build();
+    }
 }
