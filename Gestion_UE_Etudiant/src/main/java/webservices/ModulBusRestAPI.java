@@ -47,4 +47,13 @@ public class ModulBusRestAPI {
     public Response getMBByType(@QueryParam("type") Module.TypeModule type) {
         return Response.status(200).entity(helper.getModulesByType(type)).build();
     }
+    @Path("/{mat}")
+    @DELETE
+    public Response deleteMB(@PathParam("mat") String mat) {
+        if(helper.deleteModule(mat)){
+            return Response.status(200).entity("deleted").build();
+        }
+        else
+            return Response.status(400).entity("not found").build();
+    }
 }
